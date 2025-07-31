@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: profq1234/upscools-site
   branch: main
 
 media_folder: "assets/uploads"
