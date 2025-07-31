@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UPSC Blog Post | upscools</title>
+
+  <!-- SEO Meta -->
+  <meta name="description" content="Detailed UPSC strategy, tips, and preparation guidance.">
+  <meta name="keywords" content="UPSC Strategy, Blog, IAS Notes, Toppers Tips, upscools">
+  <meta name="author" content="upscools">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo-combo">
+        <img src="assets/logo.jpg" alt="upscools logo" class="logo-img" />
+        <span class="logo-text">scools</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="resources.html">Resources</a>
+        <a href="blog.html">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Blog Post Content -->
+  <main class="blog-post-container">
+    <h1 id="post-title">Loading...</h1>
+    <p id="post-date" style="font-size: 0.9rem; color: #888;"></p>
+    <div id="post-content" class="post-content"></div>
+    <a href="blog.html" style="display:block; margin-top: 2rem; text-align: center;">← Back to Blog</a>
+  </main>
+
+  <!-- Firebase + Firestore Scripts -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyBF3pyZBPfCyr5V0RF0Q2of33JWNWo3-XA",
+      authDomain: "upscools.firebaseapp.com",
+      projectId: "upscools",
+      storageBucket: "upscools.appspot.com",
+      messagingSenderId: "904130312850",
+      appId: "1:904130312850:web:7ea707ef3e8d2c98b3444b"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Get slug from URL query
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get("slug");
+
+    // Elements to display post
+    const postTitle = document.getElementById("post-title");
+    const postDate = document.getElementById("post-date");
+    const postContent = document.getElementById("post-content");
+
+    // Fetch blog post using slug
+    async function loadBlogPost() {
+      const querySnapshot = await getDocs(collection(db, "blogPosts"));
+      let found = false;
+
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        if (data.slug === slug) {
+          found = true;
+          postTitle.textContent = data.title;
+          postDate.textContent = data.date.toDate().toDateString(); // ✅ FIXED TIMESTAMP
+          postContent.innerHTML = data.content;
+        }
+      });
+
+      if (!found) {
+        postTitle.textContent = "Post not found";
+        postContent.innerHTML = "<p>Sorry, the blog post you're looking for doesn't exist.</p>";
+      }
+    }
+
+    loadBlogPost();
+  </script>
+</body>
+</html>

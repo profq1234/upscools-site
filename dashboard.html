@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard | upscools</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f9;
+    }
+
+    .dashboard-wrapper {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 240px;
+      background-color: #1f2937;
+      color: #fff;
+      padding: 2rem 1rem;
+      flex-shrink: 0;
+    }
+
+    .sidebar h2 {
+      color: #60a5fa;
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .sidebar a {
+      display: block;
+      color: #d1d5db;
+      text-decoration: none;
+      padding: 0.75rem 0;
+      font-weight: 500;
+    }
+
+    .sidebar a:hover {
+      color: #fff;
+    }
+
+    /* Feed */
+    .main-feed {
+      flex: 2;
+      padding: 2rem;
+      max-width: 750px;
+    }
+
+    .feed-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .post-card {
+      background: #fff;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .post-card h4 {
+      margin-bottom: 0.3rem;
+      font-size: 1.1rem;
+      color: #111827;
+    }
+
+    .post-card p {
+      color: #4b5563;
+    }
+
+    /* Right Sidebar */
+    .rightbar {
+      width: 300px;
+      padding: 2rem 1rem;
+      background-color: #f9fafb;
+    }
+
+    .widget {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+
+    .widget h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .logout-btn {
+      background-color: #ef4444;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+
+    .logout-btn:hover {
+      background-color: #dc2626;
+    }
+
+    @media (max-width: 992px) {
+      .dashboard-wrapper {
+        flex-direction: column;
+      }
+      .sidebar, .rightbar {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="dashboard-wrapper">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>upscools</h2>
+    <a href="#">🏠 Dashboard</a>
+    <a href="subjects.html">📚 Subjects</a>
+    <a href="#">🔖 Bookmarks</a>
+    <a href="#">👤 Profile</a>
+    <a href="#" onclick="logout()">🚪 Logout</a>
+  </aside>
+
+  <!-- Main Feed -->
+  <main class="main-feed">
+    <div class="feed-header">
+      <h2>👋 Hello, <span id="user-email">Loading...</span></h2>
+    </div>
+
+    <!-- Post Examples -->
+    <div class="post-card">
+      <h4>📝 Strategy Tip</h4>
+      <p>Start your day with 1 hour of newspaper reading + 2 hours of revision. Stay consistent!</p>
+    </div>
+
+    <div class="post-card">
+      <h4>📢 Update</h4>
+      <p>Essay writing workshop will go live on August 10. Register now via resources section.</p>
+    </div>
+
+    <div class="post-card">
+      <h4>🎯 Motivation</h4>
+      <p>"The more you sweat in peace, the less you bleed in war." — Stay focused.</p>
+    </div>
+  </main>
+
+  <!-- Rightbar -->
+  <aside class="rightbar">
+    <div class="widget">
+      <h3>Progress Tracker</h3>
+      <p>42% syllabus completed</p>
+      <div class="progress-bar">
+        <div class="progress-bar-fill" style="width: 42%; background:#3b82f6; height: 10px; border-radius: 10px;"></div>
+      </div>
+    </div>
+
+    <div class="widget">
+      <h3>Announcements</h3>
+      <ul>
+        <li>Test Series starts Aug 5</li>
+        <li>New CSAT module uploaded</li>
+        <li>Live toppers' Q&A on Aug 12</li>
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBF3pyZBPfCyr5V0RF0Q2of33JWNWo3-XA",
+    authDomain: "upscools.firebaseapp.com",
+    projectId: "upscools",
+    storageBucket: "upscools.firebasestorage.app",
+    messagingSenderId: "904130312850",
+    appId: "1:904130312850:web:7ea707ef3e8d2c98b3444b"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+  auth.onAuthStateChanged((user) => {
+    if (!user) {
+      window.location.href = "login.html";
+    } else if (!user.emailVerified) {
+      alert("Please verify your email before accessing the dashboard.");
+      auth.signOut();
+      window.location.href = "login.html";
+    } else {
+      document.getElementById("user-email").innerText = user.email;
+    }
+  });
+
+  function logout() {
+    auth.signOut().then(() => {
+      window.location.href = "login.html";
+    }).catch((error) => {
+      alert("Logout failed: " + error.message);
+    });
+  }
+</script>
+</body>
+</html>

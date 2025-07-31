@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UPSC Blog | upscools</title>
+
+  <!-- SEO Meta -->
+  <meta name="description" content="Insights, strategies, and motivation for UPSC preparation.">
+  <meta name="keywords" content="UPSC Blog, UPSC Strategy, Toppers Tips, IAS Motivation, UPSC Preparation Articles, upscools">
+  <meta name="author" content="upscools">
+  <link rel="canonical" href="https://www.upscools.com/blog.html" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo-combo">
+        <img src="assets/logo.jpg" alt="upscools logo" class="logo-img" />
+        <span class="logo-text">scools</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="resources.html">Resources</a>
+        <a href="blog.html" class="active">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="page-hero">
+    <h1>UPSC Blog</h1>
+    <p>Read insights, strategies, and stories to guide your UPSC journey</p>
+  </section>
+
+  <!-- Blog List Section -->
+  <section class="subjects">
+    <h2>Latest Articles</h2>
+    <div class="subject-grid" id="blog-container">
+      <!-- Blog cards injected by Firebase -->
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h2>upscools</h2>
+        <p>Smart, structured preparation for UPSC aspirants.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 upscools. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Firebase Blog Integration -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyBF3pyZBPfCyr5V0RF0Q2of33JWNWo3-XA",
+      authDomain: "upscools.firebaseapp.com",
+      projectId: "upscools",
+      storageBucket: "upscools.appspot.com",
+      messagingSenderId: "904130312850",
+      appId: "1:904130312850:web:7ea707ef3e8d2c98b3444b"
+    };
+
+    // Initialize
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const container = document.getElementById("blog-container");
+
+    // Fetch & render blog cards
+    const snapshot = await getDocs(collection(db, "blogPosts"));
+    snapshot.forEach((doc) => {
+      const post = doc.data();
+      const card = document.createElement("a");
+      card.className = "subject-card";
+      card.href = `blog-post.html?slug=${post.slug}`;
+      card.innerHTML = `
+        <h3>${post.title}</h3>
+        <p>${post.excerpt}</p>
+      `;
+      container.appendChild(card);
+    });
+  </script>
+</body>
+</html>

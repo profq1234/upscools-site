@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register | upscools</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    .form-container {
+      max-width: 400px;
+      margin: 4rem auto;
+      padding: 2.5rem;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container h1 {
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-container p {
+      text-align: center;
+      color: #666;
+      margin-bottom: 2rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1.5rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.9rem;
+      background-color: #0056b3;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #004096;
+    }
+
+    .form-footer {
+      text-align: center;
+      margin-top: 1.2rem;
+    }
+
+    .form-footer a {
+      color: #0056b3;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h1>Create Account</h1>
+    <p>Sign up to access your UPSC dashboard</p>
+
+    <form id="register-form">
+      <label for="reg-name">Full Name</label>
+      <input type="text" id="reg-name" name="name" placeholder="Your full name" required>
+
+      <label for="reg-email">Email</label>
+      <input type="email" id="reg-email" name="email" placeholder="you@example.com" required>
+
+      <label for="reg-password">Password</label>
+      <input type="password" id="reg-password" name="password" placeholder="At least 6 characters" required>
+
+      <button type="submit">Register</button>
+    </form>
+
+    <div class="form-footer">
+      Already have an account? <a href="login.html">Login here</a>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBF3pyZBPfCyr5V0RF0Q2of33JWNWo3-XA",
+      authDomain: "upscools.firebaseapp.com",
+      projectId: "upscools",
+      storageBucket: "upscools.firebasestorage.app",
+      messagingSenderId: "904130312850",
+      appId: "1:904130312850:web:7ea707ef3e8d2c98b3444b"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    const regForm = document.getElementById("register-form");
+
+    regForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById("reg-name").value;
+      const email = document.getElementById("reg-email").value;
+      const password = document.getElementById("reg-password").value;
+
+      auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+
+          // Update display name
+          return user.updateProfile({ displayName: name }).then(() => {
+            // Send email verification
+            return user.sendEmailVerification().then(() => {
+              alert("✅ Registration successful! Please verify your email (check inbox/spam).");
+              auth.signOut(); // Sign out until they verify
+              window.location.href = "login.html";
+            });
+          });
+        })
+        .catch((error) => {
+          alert("❌ " + error.message);
+        });
+    });
+  </script>
+</body>
+</html>

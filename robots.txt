@@ -1,0 +1,9 @@
+# robots.txt for https://upscools.com
+# Priority: Fast indexing & full visibility
+
+User-agent: *
+Allow: /
+
+# Don't block query parameters (important for dynamic URLs like filters or search)
+# Sitemap declaration for structured indexing
+Sitemap: https://upscools.com/sitemap.xml
