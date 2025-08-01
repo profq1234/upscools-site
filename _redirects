@@ -1,5 +1,5 @@
 # 🔁 Redirect www to non-www (canonical)
-/*  /offline.html  302!
+/*  /offline.html  200
 https://www.upscools.com/*  https://upscools.com/:splat  301!
 
 # 📄 Clean URL redirects (remove .html)
