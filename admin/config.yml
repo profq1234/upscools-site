@@ -1,9 +1,9 @@
 backend:
   name: git-gateway
-  branch: main  # Change if you use a different branch
+  branch: main
 
-media_folder: "images/uploads"     # Images saved here in repo
-public_folder: "/images/uploads"   # Public path used in HTML
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
 
 collections:
   - name: "homepage"
@@ -18,15 +18,18 @@ collections:
 
   - name: "navbar"
     label: "Navbar"
-    file: "content/navbar.json"
-    format: "json"
-    fields:
-      - label: "Links"
-        name: "links"
-        widget: "list"
+    files:
+      - label: "Navigation Links"
+        name: "nav"
+        file: "content/navbar.json"
+        format: "json"
         fields:
-          - { label: "Label", name: "label", widget: "string" }
-          - { label: "URL", name: "url", widget: "string" }
+          - label: "Links"
+            name: "links"
+            widget: "list"
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
 
   - name: "blog"
     label: "Blog"
@@ -36,5 +39,5 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Tags", name: "tags", widget: "list", default: ["UPSC"] }
-      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Tags", name: "tags", widget: "list" }
+      - { label: "Body", name: "body", widget: "markdown" }
