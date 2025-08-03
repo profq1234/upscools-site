@@ -1,7 +1,5 @@
 # 🔁 Redirect www to non-www (canonical)
-/*  /offline.html  302
 https://www.upscools.com/*  https://upscools.com/:splat  301!
-
 # 📄 Clean URL redirects (remove .html)
 #index pages
 /index.html        /               301
@@ -26,3 +24,4 @@ https://www.upscools.com/*  https://upscools.com/:splat  301!
 
 # ⚙️ SPA fallback route for client-side navigation
 /*                 /index.html     200
+
