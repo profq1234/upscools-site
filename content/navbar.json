@@ -1,0 +1,7 @@
+{
+  "links": [
+    { "label": "Home", "url": "/" },
+    { "label": "Subjects", "url": "/subjects.html" },
+    { "label": "Blog", "url": "/blog/" }
+  ]
+}
