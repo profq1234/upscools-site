@@ -1,51 +1,11 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>upscools Admin</title>
-  <style>
-    body { font-family: sans-serif; padding: 20px; max-width: 800px; margin: auto; }
-    label { font-weight: bold; display: block; margin-top: 15px; }
-    textarea, input { width: 100%; padding: 8px; margin-top: 5px; }
-    button { margin-top: 20px; padding: 10px 15px; font-size: 16px; cursor: pointer; }
-  </style>
-</head>
-<body>
-  <h1>upscools Admin Panel</h1>
-
-  <label for="welcome_heading">Welcome Heading:</label>
-  <input type="text" id="welcome_heading">
-
-  <label for="welcome_text">Welcome Text:</label>
-  <textarea id="welcome_text" rows="4"></textarea>
-
-  <label for="update_box">Update Box:</label>
-  <textarea id="update_box" rows="3"></textarea>
-
-  <button id="saveBtn">Save Changes</button>
-
-  <script>
-    // Load existing content
-    fetch('content.json')
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById('welcome_heading').value = data.welcome_heading;
-        document.getElementById('welcome_text').value = data.welcome_text;
-        document.getElementById('update_box').value = data.update_box;
-      });
-
-    // Save content to localStorage (live update)
-    document.getElementById('saveBtn').addEventListener('click', () => {
-      const content = {
-        welcome_heading: document.getElementById('welcome_heading').value,
-        welcome_text: document.getElementById('welcome_text').value,
-        update_box: document.getElementById('update_box').value
-      };
-
-      localStorage.setItem('upscools_content', JSON.stringify(content));
-      alert('Content updated! Visit homepage to see live changes.');
-    });
-  </script>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>Content Manager</title>
+  </head>
+  <body>
+    <!-- Netlify CMS -->
+    <script src="https://unpkg.com/netlify-cms-app@^2.0.0/dist/netlify-cms.js"></script>
+  </body>
 </html>
