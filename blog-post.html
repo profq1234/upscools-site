@@ -11,95 +11,95 @@
   <meta name="author" content="upscools">
 
   <link rel="stylesheet" href="style.css" />
-</head>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 0; background: #f9f9f9; }
+    .navbar { background: #0077cc; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+    .navbar a { color: white; text-decoration: none; margin-left: 15px; font-weight: 500; }
+    .navbar .logo-combo img { height: 40px; vertical-align: middle; }
+    .navbar .logo-text { font-size: 1.5rem; font-weight: bold; margin-left: 5px; }
 
+    .blog-container { max-width: 800px; margin: 40px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.1); }
+    .blog-title { font-size: 2rem; font-weight: bold; margin-bottom: 10px; }
+    .blog-meta { font-size: 0.9rem; color: #555; margin-bottom: 25px; }
+    .blog-meta span { margin-right: 15px; }
+    .blog-content { font-size: 1rem; color: #333; }
+    .back-link { display: block; margin-top: 40px; text-align: center; font-weight: bold; color: #0077cc; text-decoration: none; }
+    .back-link:hover { text-decoration: underline; }
+  </style>
+</head>
 <body>
+
   <!-- Navigation -->
   <header class="navbar">
-    <div class="nav-container">
-      <a href="index.html" class="logo-combo">
-        <img src="assets/logo.jpg" alt="upscools logo" class="logo-img" />
-        <span class="logo-text">scools</span>
-      </a>
-      <nav class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="resources.html">Resources</a>
-        <a href="blog.html">Blog</a>
-      </nav>
+    <div class="logo-combo">
+      <img src="assets/logo.jpg" alt="upscools logo" />
+      <span class="logo-text">scools</span>
     </div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="resources.html">Resources</a>
+      <a href="blog.html">Blog</a>
+    </nav>
   </header>
 
-  <!-- Blog Post Content -->
-  <main class="blog-post-container">
-    <h1 id="post-title">Loading...</h1>
-    <p id="post-date" style="font-size: 0.9rem; color: #888;"></p>
-    <div id="post-content" class="post-content"></div>
-    <a href="blog.html" style="display:block; margin-top: 2rem; text-align: center;">← Back to Blog</a>
+  <!-- Blog Content -->
+  <main class="blog-container">
+    <h1 id="post-title" class="blog-title">Loading...</h1>
+    <div class="blog-meta">
+      <span id="post-author"></span>
+      <span id="post-date"></span>
+    </div>
+    <div id="post-content" class="blog-content"></div>
+    <a href="blog.html" class="back-link">← Back to Blog</a>
   </main>
 
-  <!-- Firebase + Firestore Scripts -->
+  <!-- Firebase + Firestore -->
   <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-  // Firebase config
-  const firebaseConfig = {
-    apiKey: "AIzaSyBF3pyZBPfCyr5V0RF0Q2of33JWNWo3-XA",
-    authDomain: "upscools.firebaseapp.com",
-    projectId: "upscools",
-    storageBucket: "upscools.appspot.com",
-    messagingSenderId: "904130312850",
-    appId: "1:904130312850:web:7ea707ef3e8d2c98b3444b"
-  };
+    const firebaseConfig = {
+      apiKey: "AIzaSyBF3pyZBPfCyr5V0RF0Q2of33JWNWo3-XA",
+      authDomain: "upscools.firebaseapp.com",
+      projectId: "upscools",
+      storageBucket: "upscools.appspot.com",
+      messagingSenderId: "904130312850",
+      appId: "1:904130312850:web:7ea707ef3e8d2c98b3444b"
+    };
 
-  // Init Firebase
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-  // Get slug from URL
-  const params = new URLSearchParams(window.location.search);
-  const slug = params.get("slug");
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get("slug");
 
-  // HTML elements
-  const postTitle = document.getElementById("post-title");
-  const postDate = document.getElementById("post-date");
-  const postContent = document.getElementById("post-content");
+    const postTitle = document.getElementById("post-title");
+    const postDate = document.getElementById("post-date");
+    const postAuthor = document.getElementById("post-author");
+    const postContent = document.getElementById("post-content");
 
-  // Load blog post
-  async function loadBlogPost() {
-    if (!slug) {
-      postTitle.textContent = "Invalid Post";
-      return;
+    async function loadBlogPost() {
+      if (!slug) {
+        postTitle.textContent = "Invalid Post";
+        return;
+      }
+
+      const docRef = doc(db, "blogPosts", slug);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        postTitle.textContent = data.title;
+        postAuthor.textContent = "By: " + (data.author || "Admin");
+        postDate.textContent = data.date?.toDate().toDateString() || "";
+        postContent.innerHTML = data.content;
+      } else {
+        postTitle.textContent = "Post not found";
+        postContent.innerHTML = "<p>Sorry, the blog post you're looking for doesn't exist.</p>";
+      }
     }
 
-    // Fetch by slug (document ID)
-    const docRef = doc(db, "blogPosts", slug);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      const data = docSnap.data();
-      postTitle.textContent = data.title;
-      postDate.textContent = data.date?.toDate().toDateString() || "";
-      postContent.innerHTML = data.content;
-    } else {
-      postTitle.textContent = "Post not found";
-      postContent.innerHTML = "<p>Sorry, the blog post you're looking for doesn't exist.</p>";
-    }
-  }
-
-  loadBlogPost();
+    loadBlogPost();
   </script>
-  <!-- Dropdown Menu -->  <div class="dropdown-menu hidden">
-    <a href="subjects.html">Subjects</a>
-    <a href="test-series.html">Test Series</a>
-    <a href="blog.html">Blog</a>
-    <a href="pyqs.html">PYQs</a>
-    <a href="contact.html">Contact</a>
-    <a href="login.html">Login</a>
-  </div>
 </body>
-
 </html>
-
-
-
