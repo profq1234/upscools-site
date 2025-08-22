@@ -10,92 +10,87 @@
 
   <link rel="stylesheet" href="style.css" />
   <style>
-    body { font-family: 'Arial', sans-serif; margin: 0; background: #f4f7f8; }
-    header { background: #0077cc; color: #fff; padding: 15px; text-align: center; font-size: 1.5rem; font-weight: bold; }
-    .dashboard { display: flex; min-height: 100vh; }
-    .sidebar { width: 220px; background: #005fa3; color: #fff; display: flex; flex-direction: column; }
-    .sidebar button { padding: 15px; border: none; background: transparent; color: #fff; text-align: left; cursor: pointer; font-size: 1rem; border-bottom: 1px solid #0077cc; }
-    .sidebar button.active { background: #0077cc; }
-    .main { flex: 1; padding: 30px; overflow-y: auto; }
-    h2 { margin-top: 0; }
-    form { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-    input, textarea, select { width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 4px; border: 1px solid #ccc; }
-    button.save-btn { padding: 10px 25px; background: #28a745; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
-    button.save-btn:hover { background: #218838; }
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { text-align: center; }
+    .cms-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+    .tab-btn { padding: 10px 20px; cursor: pointer; background-color: #0077cc; color: white; border: none; border-radius: 5px; }
+    .tab-btn.active { background-color: #005fa3; }
+    .cms-section { display: none; max-width: 800px; margin: 0 auto; }
+    .cms-section.active { display: block; }
+    input, textarea, select { width: 100%; padding: 8px; margin-bottom: 15px; }
+    button.save-btn { padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    button.save-btn:hover { background-color: #218838; }
     #blog-content-editor { height: 300px; margin-bottom: 15px; }
   </style>
 </head>
 <body>
 
-<header>UPSC CMS Dashboard</header>
+<h1>UPSC CMS Dashboard</h1>
 
-<div class="dashboard">
-  <!-- Sidebar Tabs -->
-  <div class="sidebar">
-    <button class="tab-btn active" data-target="blog-section">Blogs</button>
-    <button class="tab-btn" data-target="subjects-section">Subjects</button>
-    <button class="tab-btn" data-target="pages-section">Pages</button>
-  </div>
+<!-- Tabs -->
+<div class="cms-tabs">
+  <button class="tab-btn active" data-target="blog-section">Blogs</button>
+  <button class="tab-btn" data-target="subjects-section">Subjects</button>
+  <button class="tab-btn" data-target="pages-section">Pages</button>
+</div>
 
-  <!-- Main Content -->
-  <div class="main">
-    <!-- Blogs Section -->
-    <div id="blog-section" class="cms-section active">
-      <h2>Manage Blogs</h2>
-      <form id="blog-form">
-        <label>Slug (unique URL ID):</label>
-        <input type="text" id="blog-slug" placeholder="e.g., prepare-upsc-1-year" required>
+<!-- Sections -->
 
-        <label>Title:</label>
-        <input type="text" id="blog-title" required>
+<!-- Blogs Section -->
+<div id="blog-section" class="cms-section active">
+  <h2>Manage Blogs</h2>
+  <form id="blog-form">
+    <label>Slug (unique URL ID):</label>
+    <input type="text" id="blog-slug" placeholder="e.g., prepare-upsc-1-year" required>
 
-        <label>Excerpt:</label>
-        <textarea id="blog-excerpt" placeholder="Short summary for blog card" required></textarea>
+    <label>Title:</label>
+    <input type="text" id="blog-title" required>
 
-        <label>Content (Rich Text Editor):</label>
-        <div id="blog-content-editor"></div>
+    <label>Excerpt:</label>
+    <textarea id="blog-excerpt" placeholder="Short summary for blog card" required></textarea>
 
-        <label>Author:</label>
-        <input type="text" id="blog-author" placeholder="Your name">
+    <label>Content (Rich Text Editor):</label>
+    <div id="blog-content-editor"></div>
 
-        <label>Date:</label>
-        <input type="date" id="blog-date">
+    <label>Author:</label>
+    <input type="text" id="blog-author" placeholder="Your name">
 
-        <button type="submit" class="save-btn">Save Blog</button>
-      </form>
-    </div>
+    <label>Date:</label>
+    <input type="date" id="blog-date">
 
-    <!-- Subjects Section -->
-    <div id="subjects-section" class="cms-section" style="display:none;">
-      <h2>Manage Subjects</h2>
-      <form id="subjects-form">
-        <label>Subject Name:</label>
-        <input type="text" id="subject-name" placeholder="e.g., History" required>
+    <button type="submit" class="save-btn">Save Blog</button>
+  </form>
+</div>
 
-        <label>Description:</label>
-        <textarea id="subject-desc" placeholder="Description of the subject" style="height:150px;"></textarea>
+<!-- Subjects Section -->
+<div id="subjects-section" class="cms-section">
+  <h2>Manage Subjects</h2>
+  <form id="subjects-form">
+    <label>Subject Name:</label>
+    <input type="text" id="subject-name" placeholder="e.g., History" required>
 
-        <button type="submit" class="save-btn">Save Subject</button>
-      </form>
-    </div>
+    <label>Description:</label>
+    <textarea id="subject-desc" placeholder="Description of the subject" style="height:150px;"></textarea>
 
-    <!-- Pages Section -->
-    <div id="pages-section" class="cms-section" style="display:none;">
-      <h2>Manage Other Pages</h2>
-      <form id="pages-form">
-        <label>Page ID (unique):</label>
-        <input type="text" id="page-id" placeholder="e.g., about" required>
+    <button type="submit" class="save-btn">Save Subject</button>
+  </form>
+</div>
 
-        <label>Title:</label>
-        <input type="text" id="page-title" required>
+<!-- Pages Section -->
+<div id="pages-section" class="cms-section">
+  <h2>Manage Other Pages</h2>
+  <form id="pages-form">
+    <label>Page ID (unique):</label>
+    <input type="text" id="page-id" placeholder="e.g., about" required>
 
-        <label>Content (HTML allowed):</label>
-        <textarea id="page-content" placeholder="<p>Full page content</p>" style="height:200px;"></textarea>
+    <label>Title:</label>
+    <input type="text" id="page-title" required>
 
-        <button type="submit" class="save-btn">Save Page</button>
-      </form>
-    </div>
-  </div>
+    <label>Content (HTML allowed):</label>
+    <textarea id="page-content" placeholder="<p>Full page content</p>" style="height:200px;"></textarea>
+
+    <button type="submit" class="save-btn">Save Page</button>
+  </form>
 </div>
 
 <!-- Firebase + Quill Scripts -->
@@ -125,8 +120,8 @@
       tabButtons.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
 
-      sections.forEach(sec => sec.style.display = 'none');
-      document.getElementById(btn.dataset.target).style.display = 'block';
+      sections.forEach(sec => sec.classList.remove("active"));
+      document.getElementById(btn.dataset.target).classList.add("active");
     });
   });
 
@@ -148,21 +143,25 @@
   // ---------- Blog Form ----------
   document.getElementById("blog-form").addEventListener("submit", async e => {
     e.preventDefault();
+
     const slug = document.getElementById("blog-slug").value.trim();
     const title = document.getElementById("blog-title").value.trim();
     const excerpt = document.getElementById("blog-excerpt").value.trim();
-    const content = quill.root.innerHTML;
+    const content = quill.root.innerHTML; // get rich text HTML
     const author = document.getElementById("blog-author").value.trim() || "Admin";
     const dateValue = document.getElementById("blog-date").value;
     const date = dateValue ? Timestamp.fromDate(new Date(dateValue)) : Timestamp.now();
 
-    if (!slug || !title || !excerpt || !content) return alert("Please fill all required fields.");
+    if (!slug || !title || !excerpt || !content) {
+      alert("Please fill all required fields.");
+      return;
+    }
 
     try {
       await setDoc(doc(db, "blogPosts", slug), { title, slug, excerpt, content, author, date });
       alert("Blog saved successfully!");
       document.getElementById("blog-form").reset();
-      quill.setContents([]);
+      quill.setContents([]); // clear editor
     } catch (err) {
       console.error(err);
       alert("Error saving blog.");
@@ -174,9 +173,17 @@
     e.preventDefault();
     const name = document.getElementById("subject-name").value.trim();
     const desc = document.getElementById("subject-desc").value.trim();
-    if (!name) return alert("Enter subject name.");
-    try { await setDoc(doc(db, "subjects", name), { name, desc }); alert("Subject saved!"); document.getElementById("subjects-form").reset(); } 
-    catch(err) { console.error(err); alert("Error saving subject."); }
+
+    if (!name) { alert("Enter subject name."); return; }
+
+    try {
+      await setDoc(doc(db, "subjects", name), { name, desc });
+      alert("Subject saved!");
+      document.getElementById("subjects-form").reset();
+    } catch (err) {
+      console.error(err);
+      alert("Error saving subject.");
+    }
   });
 
   // ---------- Pages Form ----------
@@ -185,9 +192,17 @@
     const pageId = document.getElementById("page-id").value.trim();
     const title = document.getElementById("page-title").value.trim();
     const content = document.getElementById("page-content").value.trim();
-    if (!pageId || !title || !content) return alert("Fill all fields.");
-    try { await setDoc(doc(db, "sitePages", pageId), { title, content }); alert("Page saved!"); document.getElementById("pages-form").reset(); } 
-    catch(err) { console.error(err); alert("Error saving page."); }
+
+    if (!pageId || !title || !content) { alert("Fill all fields."); return; }
+
+    try {
+      await setDoc(doc(db, "sitePages", pageId), { title, content });
+      alert("Page saved!");
+      document.getElementById("pages-form").reset();
+    } catch (err) {
+      console.error(err);
+      alert("Error saving page.");
+    }
   });
 </script>
 
