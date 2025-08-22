@@ -1,0 +1,11 @@
+body { font-family: Arial, sans-serif; margin: 20px; }
+h1 { text-align: center; }
+.cms-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+.tab-btn { padding: 10px 20px; cursor: pointer; background-color: #0077cc; color: white; border: none; border-radius: 5px; }
+.tab-btn.active { background-color: #005fa3; }
+.cms-section { display: none; max-width: 800px; margin: 0 auto; }
+.cms-section.active { display: block; }
+input, textarea, select { width: 100%; padding: 8px; margin-bottom: 15px; }
+button.save-btn { padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; }
+button.save-btn:hover { background-color: #218838; }
+#blog-content-editor { height: 300px; margin-bottom: 15px; }
