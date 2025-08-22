@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog CMS | upscools</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>UPSC Blog CMS</h1>
+
+  <form id="blog-form">
+    <label>Slug (unique URL ID):</label>
+    <input type="text" id="slug" required placeholder="e.g., prepare-upsc-1-year" />
+
+    <label>Title:</label>
+    <input type="text" id="title" required />
+
+    <label>Excerpt:</label>
+    <textarea id="excerpt" required placeholder="Short summary for blog card"></textarea>
+
+    <label>Content (HTML allowed):</label>
+    <textarea id="content" required placeholder="<p>Full blog content</p>"></textarea>
+
+    <label>Author:</label>
+    <input type="text" id="author" placeholder="Your name" />
+
+    <label>Date:</label>
+    <input type="date" id="date" />
+
+    <button type="submit">Save Blog</button>
+  </form>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, doc, setDoc, getDoc, Timestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyBF3pyZBPfCyr5V0RF0Q2of33JWNWo3-XA",
+      authDomain: "upscools.firebaseapp.com",
+      projectId: "upscools",
+      storageBucket: "upscools.appspot.com",
+      messagingSenderId: "904130312850",
+      appId: "1:904130312850:web:7ea707ef3e8d2c98b3444b"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const form = document.getElementById("blog-form");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const slug = document.getElementById("slug").value.trim();
+      const title = document.getElementById("title").value.trim();
+      const excerpt = document.getElementById("excerpt").value.trim();
+      const content = document.getElementById("content").value.trim();
+      const author = document.getElementById("author").value.trim() || "Admin";
+      const dateValue = document.getElementById("date").value;
+      const date = dateValue ? Timestamp.fromDate(new Date(dateValue)) : Timestamp.now();
+
+      if (!slug || !title || !excerpt || !content) {
+        alert("Please fill all required fields.");
+        return;
+      }
+
+      try {
+        // Save or update blog in Firestore
+        await setDoc(doc(db, "blogPosts", slug), {
+          title,
+          slug,
+          excerpt,
+          content,
+          author,
+          date
+        });
+
+        alert(`Blog saved successfully!`);
+        form.reset();
+      } catch (error) {
+        console.error("Error saving blog:", error);
+        alert("Error saving blog. Check console for details.");
+      }
+    });
+  </script>
+</body>
+</html>
