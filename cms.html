@@ -5,19 +5,71 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CMS Dashboard</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; background: #f9f9f9; }
-    .navbar { background: navy; color: white; padding: 10px; text-align: center; }
-    .tabs { display: flex; justify-content: center; margin-top: 20px; }
-    .tab { margin: 0 10px; padding: 10px 20px; background: #0055aa; color: white; border-radius: 5px; text-decoration: none; }
-    .tab:hover { background: #003377; }
+    /* Global Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f0f4f8;
+      color: #333;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: navy;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    /* Tabs Container */
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 30px auto;
+      max-width: 800px;
+      gap: 15px;
+      padding: 0 10px;
+    }
+
+    /* Tab Buttons */
+    .tab {
+      flex: 1 1 calc(45% - 20px);
+      background: #0055aa;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      text-decoration: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .tab:hover {
+      background: #003377;
+      transform: translateY(-2px);
+    }
+
+    /* Mobile-Friendly */
+    @media (max-width: 600px) {
+      .tab {
+        flex: 1 1 100%;
+      }
+    }
   </style>
 </head>
 <body>
 
+  <!-- Navbar -->
   <div class="navbar">
-    <h2>CMS Dashboard</h2>
+    CMS Dashboard
   </div>
 
+  <!-- Tabs -->
   <div class="tabs">
     <a href="cms-pages.html" class="tab">Pages</a>
     <a href="cms-blog.html" class="tab">Blogs</a>
