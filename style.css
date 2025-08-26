@@ -709,7 +709,7 @@ header.navbar {
 .countdown-section {
   text-align: center;
   padding: 2rem 1rem;
-  background-color: #0A2647;
+  background-color: #0a0a23;
   color: white;
 }
 
@@ -727,5 +727,6 @@ header.navbar {
   border-radius: 8px;
   min-width: 80px;
 }
+
 
 
