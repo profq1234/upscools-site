@@ -525,6 +525,8 @@ a {
 .logo-img {
   height: 40px;
   width: auto;
+  border-radius: 50%; /* Makes it circular */
+  object-fit: cover;  /* Ensures the image fits inside the circle */
   display: block;
 }
 
@@ -725,3 +727,4 @@ header.navbar {
   border-radius: 8px;
   min-width: 80px;
 }
+
