@@ -727,19 +727,10 @@ header.navbar {
   flex-wrap: wrap; /* Wrap on smaller screens */
 }
 
-#countdown div {
-  background-color: #ffffff; /* White square */
-  color: #1a237e; /* Dark blue text inside squares */
-  padding: 20px 15px;
-  border-radius: 10px; /* Rounded corners */
-  min-width: 80px; /* Ensure consistent square size */
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-
 #countdown span {
   display: block;
-  font-size: 2rem; /* Bigger number inside the square */
+  font-size: 4rem; /* Bigger number inside the square */
   margin-bottom: 5px;
 }
+
 
