@@ -706,12 +706,10 @@ header.navbar {
   margin-top: 1.5rem;
 
 }
-.countdown-section {
-  text-align: center;
-  padding: 2rem 1rem;
-  background-color: #0a0a23;
-  color: white;
-}
+  .countdown-section {
+    display: flex;
+    gap: 10px; /* space between squares */
+  }
 
 #countdown {
   display: flex;
@@ -732,3 +730,4 @@ header.navbar {
     display: flex;
     gap: 10px; /* space between squares */
 }
+
