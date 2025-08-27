@@ -706,17 +706,10 @@ header.navbar {
   margin-top: 1.5rem;
 
 }
-  .countdown-section {
-    display: flex;
-    gap: 10px; /* space between squares */
-  }
-
-#countdown {
+  
+.countdown {
   display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  font-size: 1.5rem;
-  font-weight: bold;
+    gap: 10px; /* space between squares */
 }
 
 #countdown div {
@@ -730,4 +723,5 @@ header.navbar {
     display: flex;
     gap: 10px; /* space between squares */
 }
+
 
