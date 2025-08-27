@@ -709,32 +709,27 @@ header.navbar {
 #countdown {
   display: flex;
   justify-content: center;
-  gap: 10px; /* space between squares */
+  gap: 10px;
   margin-top: 1rem;
 }
 
-#countdown div {
-  background-color: white;   /* white square */
-  color: black;              /* number color */
-  width: 80px;               /* square width */
-  height: 80px;              /* square height */
+.countdown-box {
+  background-color: white;
+  color: black;
+  width: 60px;
+  height: 60px;
   display: flex;
-  flex-direction: column;    /* stack number and label */
-  justify-content: center;   /* center vertically */
-  align-items: center;       /* center horizontally */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   font-size: 1.5rem;
   font-weight: bold;
-  border-radius: 8px;        /* rounded corners */
+  border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-#countdown div span {
-  font-size: 1.5rem;         /* number size */
-}
-
-#countdown div::after {
-  content: attr(data-label); /* optional: if you want labels via CSS */
-  font-size: 0.8rem;
+.countdown-box .label {
+  font-size: 0.7rem;
   color: #333;
   margin-top: 4px;
 }
