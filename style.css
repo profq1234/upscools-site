@@ -728,5 +728,23 @@ header.navbar {
   min-width: 80px;
 }
 
+.countdown-container {
+    display: flex;
+    gap: 10px; /* space between squares */
+}
+
+.countdown-container {
+    background-color: white; /* white square */
+    color: black; /* number color */
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center; /* center horizontally */
+    align-items: center;     /* center vertically */
+    font-size: 2rem;
+    font-weight: bold;
+    border-radius: 8px; /* optional: rounded corners */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* optional: subtle shadow */
+}
 
 
