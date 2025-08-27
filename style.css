@@ -722,6 +722,7 @@ header.navbar {
 
 #countdown {
   display: flex;
+  font-size: 2rem;
   justify-content: center; /* Center the countdown items horizontally */
   gap: 15px; /* Space between each time unit */
   flex-wrap: wrap; /* Wrap on smaller screens */
@@ -732,6 +733,7 @@ header.navbar {
   font-size: 4rem; /* Bigger number inside the square */
   margin-bottom: 5px;
 }
+
 
 
 
