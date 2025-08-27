@@ -707,21 +707,38 @@ header.navbar {
 
 }
   
-.countdown {
+.countdown-section {
+  text-align: center; /* Center the heading and content */
+  padding: 40px 20px;
+  background-color: #1a237e; /* Dark blue background for section */
+  color: #fff; /* Default text color white */
+  font-family: Arial, sans-serif;
+}
+
+.countdown-section h2 {
+  margin-bottom: 30px;
+  font-size: 2rem;
+}
+
+#countdown {
   display: flex;
-    gap: 10px; /* space between squares */
+  justify-content: center; /* Center the countdown items horizontally */
+  gap: 15px; /* Space between each time unit */
+  flex-wrap: wrap; /* Wrap on smaller screens */
 }
 
 #countdown div {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 1rem;
-  border-radius: 8px;
-  min-width: 80px;
+  background-color: #ffffff; /* White square */
+  color: #1a237e; /* Dark blue text inside squares */
+  padding: 20px 15px;
+  border-radius: 10px; /* Rounded corners */
+  min-width: 80px; /* Ensure consistent square size */
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
-.countdown-container {
-    display: flex;
-    gap: 10px; /* space between squares */
+#countdown span {
+  display: block;
+  font-size: 2rem; /* Bigger number inside the square */
+  margin-bottom: 5px;
 }
-
-
