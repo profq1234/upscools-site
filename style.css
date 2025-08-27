@@ -719,16 +719,12 @@ header.navbar {
   margin-bottom: 30px;
   font-size: 2rem;
 }
-
-#countdown div {
-  background-color: #ffffff; /* White square */
-  color: #1a237e; /* Dark blue text inside the square */
-  padding: 20px 15px; /* Space inside the square */
-  border-radius: 10px; /* Rounded corners */
-  min-width: 80px; /* Consistent square size */
-  text-align: center; /* Center text inside square */
-  font-weight: bold;
-  font-size: 1.5rem; /* Size of number */
+#countdown {
+  display: flex;
+  font-size: 2rem;
+  justify-content: center; /* Center the countdown items horizontally */
+  gap: 15px; /* Space between each time unit */
+  flex-wrap: wrap; /* Wrap on smaller screens */
 }
 
 #countdown span {
@@ -736,6 +732,7 @@ header.navbar {
   font-size: 4rem; /* Bigger number inside the square */
   margin-bottom: 5px;
 }
+
 
 
 
