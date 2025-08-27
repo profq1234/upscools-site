@@ -717,34 +717,18 @@ header.navbar {
   display: flex;
   justify-content: center;
   gap: 1.5rem;
-  font-size: 1.5rem;
-  font-weight: bold;
 }
 
 #countdown div {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 1rem;
-  border-radius: 8px;
-  min-width: 80px;
+  background-color: white; /* solid white square */
+  color: black; /* number color */
+  width: 80px;  /* fixed square width */
+  height: 80px; /* fixed square height */
+  display: flex;
+  justify-content: center; /* center number horizontally */
+  align-items: center;     /* center number vertically */
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 8px; /* rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* subtle shadow */
 }
-
-.countdown-container {
-    display: flex;
-    gap: 10px; /* space between squares */
-}
-
-.countdown-container {
-    background-color: white; /* white square */
-    color: black; /* number color */
-    width: 60px;
-    height: 60px;
-    display: flex;
-    justify-content: center; /* center horizontally */
-    align-items: center;     /* center vertically */
-    font-size: 2rem;
-    font-weight: bold;
-    border-radius: 8px; /* optional: rounded corners */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* optional: subtle shadow */
-}
-
-
