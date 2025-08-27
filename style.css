@@ -706,30 +706,29 @@ header.navbar {
   margin-top: 1.5rem;
 
 }
+.countdown-section {
+  text-align: center;
+  padding: 2rem 1rem;
+  background-color: #0a0a23;
+  color: white;
+}
+
 #countdown {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-top: 1rem;
-}
-
-.countdown-box {
-  background-color: white;
-  color: black;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  gap: 1.5rem;
   font-size: 1.5rem;
   font-weight: bold;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-.countdown-box .label {
-  font-size: 0.7rem;
-  color: #333;
-  margin-top: 4px;
+#countdown div {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 8px;
+  min-width: 80px;
+}
+
+.countdown-container {
+    display: flex;
+    gap: 10px; /* space between squares */
 }
