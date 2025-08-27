@@ -710,14 +710,14 @@ header.navbar {
 .countdown-section {
   text-align: center; /* Center the heading and content */
   padding: 40px 20px;
-  background-color:#2c2c64; /* Dark blue background for section */
+  background-color:#0a0a23; /* Dark blue background for section */
   color: #fff; /* Default text color white */
   font-family: Arial, sans-serif;
 }
 
 .countdown-section h2 {
   margin-bottom: 30px;
-  font-size: 2rem;
+  font-size: 8rem;
 }
 
 #countdown {
@@ -732,5 +732,6 @@ header.navbar {
   font-size: 4rem; /* Bigger number inside the square */
   margin-bottom: 5px;
 }
+
 
 
